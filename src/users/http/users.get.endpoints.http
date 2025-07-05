@@ -1,0 +1,18 @@
+GET http://localhost:3000/users/14452
+    ?limit=fdsgg
+    &page=1
+Accept: application/json
+
+###
+GET http://localhost:3000/users/14452/optional
+Accept: application/json
+
+###
+GET http://localhost:3000/users/14452
+Accept: application/json
+
+###
+GET http://localhost:3000/users
+Accept: application/json
+
+###
