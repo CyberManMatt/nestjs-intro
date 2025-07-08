@@ -12,9 +12,12 @@ import {
 import { CreateUserDto } from './dtos/create-user.dto';
 import { GetUsersParamDto } from './dtos/get-users-param.dto';
 import { PatchUserDto } from './dtos/patch-user.dto';
+import { UsersService } from './providers/users.service';
 
 @Controller('users')
 export class UsersController {
+  constructor(private readonly usersService: UsersService) {}
+
   @Get('{/:id}') // As of Nest v11, optional parameters must be enclosed in curly brackets
   /*
    * Finds a user in the database. Will return all users if no `id` parameter
@@ -32,8 +35,7 @@ export class UsersController {
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
   ) {
-    console.log(getUsersParamDto);
-    return 'You sent a GET request to the users endpoint';
+    return this.usersService.findAll(getUsersParamDto, limit, page);
   }
 
   @Post()
